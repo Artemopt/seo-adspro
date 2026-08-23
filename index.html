@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEO AdsPro — создание сайтов, SEO-продвижение и настройка рекламы</title>
-<meta name="description" content="SEO AdsPro: создаём сайты, выводим их в топ Google и Яндекс и запускаем рекламу, которая окупается. Один подрядчик на весь путь — от разработки до заявок.">
+<title>SEO AdsPro — створення сайтів, SEO-просування та налаштування реклами</title>
+<meta name="description" content="SEO AdsPro: створюємо сайти, виводимо їх у топ Google і запускаємо рекламу, яка окупається. Один підрядник на весь шлях — від розробки до заявок.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://seo-adspro.web.app/">
 <meta name="theme-color" content="#14161a">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SEO AdsPro">
-<meta property="og:title" content="SEO AdsPro — сайты, SEO и реклама, которые выводят в топ">
-<meta property="og:description" content="Создание сайта, продвижение в поиске и настройка рекламы — под одним подрядчиком и одной сметой.">
+<meta property="og:title" content="SEO AdsPro — сайти, SEO та реклама, які виводять у топ">
+<meta property="og:description" content="Створення сайту, просування в пошуку та налаштування реклами — під одним підрядником і однією кошторисною сумою.">
 <meta property="og:url" content="https://seo-adspro.web.app/">
+<meta property="og:locale" content="uk_UA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SEO AdsPro — сайты, SEO и реклама, которые выводят в топ">
-<meta name="twitter:description" content="Создание сайта, продвижение в поиске и настройка рекламы — под одним подрядчиком и одной сметой.">
+<meta name="twitter:title" content="SEO AdsPro — сайти, SEO та реклама, які виводять у топ">
+<meta name="twitter:description" content="Створення сайту, просування в пошуку та налаштування реклами — під одним підрядником і однією кошторисною сумою.">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='%23C9A227' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 
@@ -26,9 +27,10 @@
   "@type": "ProfessionalService",
   "name": "SEO AdsPro",
   "url": "https://seo-adspro.web.app/",
-  "description": "Создание сайтов, SEO-продвижение и настройка контекстной и таргетированной рекламы.",
-  "areaServed": "RU",
-  "priceRange": "₽₽",
+  "description": "Створення сайтів, SEO-просування та налаштування контекстної і таргетованої реклами.",
+  "areaServed": "UA",
+  "priceRange": "₴₴",
+  "telephone": "+38 (068) 000-00-00",
   "sameAs": []
 }
 </script>
@@ -56,7 +58,7 @@
   }
   .serif{font-family:Georgia, "Times New Roman", serif;}
   .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
-  .container{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .container{max-width:1160px; margin:0 auto; padding:0 28px;}
   a{color:inherit;}
   img,svg{display:block; max-width:100%;}
 
@@ -67,10 +69,10 @@
   }
   nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 28px; max-width:1120px; margin:0 auto;
+    padding:18px 28px; max-width:1160px; margin:0 auto; gap:20px;
   }
   .logo{
-    display:flex; align-items:center; gap:9px;
+    display:flex; align-items:center; gap:9px; flex-shrink:0;
     font-family:Georgia, serif; font-weight:700; font-size:19px; letter-spacing:.01em;
   }
   .logo .mark{
@@ -78,14 +80,17 @@
     border-radius:5px; display:flex; align-items:center; justify-content:center;
     font-family:Georgia, serif; font-weight:700; font-size:15px;
   }
-  nav .links{display:flex; gap:30px; font-size:14.5px;}
-  nav .links a{color:var(--muted); text-decoration:none; transition:color .15s;}
+  nav .links{display:flex; gap:20px; font-size:13.5px; flex-wrap:wrap;}
+  nav .links a{color:var(--muted); text-decoration:none; transition:color .15s; white-space:nowrap;}
   nav .links a:hover{color:var(--ink);}
+  nav .links a.is-service{color:var(--ink); font-weight:600;}
+  nav .links a.is-service:hover{color:var(--gold);}
+  .nav-sep{width:1px; background:var(--border); align-self:stretch; margin:2px 2px;}
   .nav-cta{
-    font-size:14px; color:var(--bg); background:var(--gold);
+    font-size:14px; color:var(--bg); background:var(--gold); flex-shrink:0;
     padding:10px 20px; border-radius:4px; text-decoration:none; font-weight:600;
   }
-  @media (max-width:780px){ nav .links{display:none;} }
+  @media (max-width:900px){ nav .links{display:none;} }
 
   .hero{padding:88px 0 100px; border-bottom:1px solid var(--border);}
   .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:center;}
@@ -156,7 +161,7 @@
   .stats-grid b{display:block; font-family:Georgia,serif; font-size:34px; color:var(--gold); font-weight:700;}
   .stats-grid span{font-size:13px; color:var(--muted); margin-top:6px; display:block;}
 
-  section{padding:96px 0; border-bottom:1px solid var(--border);}
+  section{padding:96px 0; border-bottom:1px solid var(--border); scroll-margin-top:80px;}
   .sec-head{margin-bottom:56px; max-width:640px;}
   .sec-tag{font-size:12.5px; color:var(--gold); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
   h2{font-family:Georgia,serif; font-size:clamp(26px,3.2vw,36px); font-weight:700; margin-top:10px;}
@@ -164,7 +169,7 @@
 
   .services{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
   @media (max-width:860px){ .services{grid-template-columns:1fr;} }
-  .service{background:var(--surface); padding:36px 30px;}
+  .service{background:var(--surface); padding:36px 30px; scroll-margin-top:90px;}
   .service .badge{
     width:38px; height:38px; border-radius:8px; background:var(--surface-2);
     display:flex; align-items:center; justify-content:center;
@@ -185,7 +190,7 @@
   .step{display:grid; grid-template-columns:64px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--border);}
   .step:last-child{border-bottom:1px solid var(--border);}
   .step .idx{font-family:Georgia,serif; font-size:15px; color:var(--gold); font-weight:700; padding-top:2px;}
-  .step h4{font-size:16.5px; font-weight:600; margin-bottom:6px;}
+  .step h3{font-size:16.5px; font-weight:600; margin-bottom:6px; font-family:inherit;}
   .step p{color:var(--muted); font-size:14.5px; max-width:600px;}
   .step .when{font-size:12.5px; color:var(--muted); margin-top:6px;}
 
@@ -207,7 +212,7 @@
 
   .faq-item{border-top:1px solid var(--border); padding:24px 0;}
   .faq-item:last-child{border-bottom:1px solid var(--border);}
-  .faq-item h4{font-size:16px; font-weight:600; margin-bottom:8px;}
+  .faq-item h3{font-size:16px; font-weight:600; margin-bottom:8px; font-family:inherit;}
   .faq-item p{color:var(--muted); font-size:14.5px; max-width:640px;}
 
   .cta-section{padding:104px 0; text-align:center; border-bottom:none;}
@@ -230,7 +235,7 @@
   footer{padding:52px 0 40px;}
   .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid var(--border);}
   @media (max-width:700px){ .foot-grid{grid-template-columns:1fr; gap:28px;} }
-  .foot-grid h5{font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:14px;}
+  .foot-grid h3{font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:14px; font-family:inherit; font-weight:600;}
   .foot-grid p, .foot-grid a{font-size:14px; color:var(--muted); text-decoration:none; display:block; margin-bottom:8px;}
   .foot-grid a:hover{color:var(--ink);}
   .foot-bottom{display:flex; justify-content:space-between; margin-top:24px; font-size:12.5px; color:var(--muted); flex-wrap:wrap; gap:10px;}
@@ -249,12 +254,15 @@
   <nav>
     <div class="logo"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
     <div class="links">
-      <a href="#services">Услуги</a>
-      <a href="#process">Процесс</a>
-      <a href="#pricing">Тарифы</a>
-      <a href="#faq">Вопросы</a>
+      <a class="is-service" href="#site-creation">Створення сайту</a>
+      <a class="is-service" href="#site-promotion">Просування сайту</a>
+      <a class="is-service" href="#site-ads">Реклама на сайт</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="#process">Процес</a>
+      <a href="#pricing">Тарифи</a>
+      <a href="#faq">Питання</a>
     </div>
-    <a class="nav-cta" href="#cta">Обсудить проект</a>
+    <a class="nav-cta" href="#cta">Обговорити проєкт</a>
   </nav>
 </header>
 
@@ -263,31 +271,37 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
+<<<<<<< HEAD
         <span class="eyebrow"><span class="dot"></span>Создание · SEO · Реклама</span>
         <h1>Сайт,gethab2233 который находят.<br><span class="accent">И реклама, которая окупается.</span></h1>
         <p class="hero-sub">SEO AdsPro строит сайты и выводит их на первые позиции в Google и Яндекс, а затем подключает рекламу, которая приносит заявки, а не просто клики.</p>
+=======
+        <span class="eyebrow"><span class="dot"></span>Створення · SEO · Реклама</span>
+        <h1>Сайт, який знаходять.<br><span class="accent">І реклама, яка окупається.</span></h1>
+        <p class="hero-sub">SEO AdsPro створює сайти та виводить їх на перші позиції в Google, а потім підключає рекламу, яка приносить заявки, а не просто кліки.</p>
+>>>>>>> 6222819 (ua)
         <div class="hero-actions">
-          <a class="btn-primary" href="#cta">Оставить заявку</a>
-          <a class="btn-secondary" href="#services">Услуги и цены</a>
+          <a class="btn-primary" href="#cta">Залишити заявку</a>
+          <a class="btn-secondary" href="#site-creation">Послуги та ціни</a>
         </div>
         <div class="trust-row">
-          <div><b>120+</b>сайтов запущено</div>
-          <div><b>топ-10</b>по ключевым запросам</div>
-          <div><b>4,9 / 5</b>средняя оценка клиентов</div>
+          <div><b>120+</b>сайтів запущено</div>
+          <div><b>топ-10</b>за ключовими запитами</div>
+          <div><b>4,9 / 5</b>середня оцінка клієнтів</div>
         </div>
       </div>
 
       <div class="serp-card reveal">
-        <span class="serp-badge">Позиция №1 · Google</span>
+        <span class="serp-badge">Позиція №1 · Google</span>
         <div class="serp-topbar">
           <div class="lights"><span></span><span></span><span></span></div>
-          <div class="bar">google.com/search?q=ваша+услуга+ваш+город</div>
+          <div class="bar">google.com/search?q=ваша+послуга+ваше+місто</div>
         </div>
         <div class="serp-result top">
           <div class="serp-rank"><span class="n">1</span></div>
-          <div class="serp-url">ваш-сайт.ru</div>
-          <div class="serp-title">Ваша компания — официальный сайт</div>
-          <div class="serp-desc">Именно так выглядит цель: ваш сайт — первый результат по нужным клиенту запросам.</div>
+          <div class="serp-url">ваш-сайт.ua</div>
+          <div class="serp-title">Ваша компанія — офіційний сайт</div>
+          <div class="serp-desc">Саме так виглядає мета: ваш сайт — перший результат за потрібними клієнту запитами.</div>
         </div>
         <div class="serp-result">
           <div class="serp-rank"><span class="n">2</span></div>
@@ -303,50 +317,50 @@
 
   <section class="stats">
     <div class="container stats-grid reveal">
-      <div><b>7–14</b><span>дней на запуск сайта</span></div>
-      <div><b>4–8</b><span>недель до роста в выдаче</span></div>
-      <div><b>3</b><span>дня на запуск рекламы</span></div>
-      <div><b>1</b><span>подрядчик на весь путь</span></div>
+      <div><b>7–14</b><span>днів на запуск сайту</span></div>
+      <div><b>4–8</b><span>тижнів до зростання у видачі</span></div>
+      <div><b>3</b><span>дні на запуск реклами</span></div>
+      <div><b>1</b><span>підрядник на весь шлях</span></div>
     </div>
   </section>
 
   <section id="services">
     <div class="container">
       <div class="sec-head reveal">
-        <div class="sec-tag">Услуги</div>
-        <h2>Три направления — один результат</h2>
-        <p>Берём проект целиком или подключаемся на любом этапе: сайт уже есть — усилим продвижением и рекламой.</p>
+        <div class="sec-tag">Послуги</div>
+        <h2>Три напрямки — один результат</h2>
+        <p>Беремо проєкт цілком або підключаємось на будь-якому етапі: сайт вже є — підсилимо просуванням і рекламою.</p>
       </div>
 
       <div class="services reveal">
-        <div class="service">
+        <div class="service" id="site-creation">
           <div class="badge">01</div>
-          <h3>Создание сайта</h3>
-          <p>Разрабатываем сайт под вашу задачу: визитку, каталог или сайт услуг, с фокусом на путь клиента к заявке.</p>
+          <h3>Створення сайту</h3>
+          <p>Розробляємо сайт під ваше завдання: візитку, каталог або сайт послуг, з фокусом на шлях клієнта до заявки.</p>
           <ul>
-            <li>Дизайн и вёрстка<span>вкл.</span></li>
-            <li>Мобильная адаптация<span>вкл.</span></li>
-            <li>Срок разработки<span>7–14 дней</span></li>
+            <li>Дизайн і верстка<span>вкл.</span></li>
+            <li>Мобільна адаптація<span>вкл.</span></li>
+            <li>Термін розробки<span>7–14 днів</span></li>
           </ul>
         </div>
-        <div class="service">
+        <div class="service" id="site-promotion">
           <div class="badge">02</div>
-          <h3>SEO-продвижение</h3>
-          <p>Технически оптимизируем сайт, собираем семантику и пишем тексты под запросы, по которым вас ищут клиенты.</p>
+          <h3>Просування сайту</h3>
+          <p>Технічно оптимізуємо сайт, збираємо семантику і пишемо тексти під запити, за якими вас шукають клієнти.</p>
           <ul>
-            <li>SEO-аудит и семантика<span>вкл.</span></li>
-            <li>Яндекс.Карты и справочники<span>вкл.</span></li>
-            <li>Первые сдвиги в выдаче<span>4–8 недель</span></li>
+            <li>SEO-аудит і семантика<span>вкл.</span></li>
+            <li>Google Business Profile<span>вкл.</span></li>
+            <li>Перші зрушення у видачі<span>4–8 тижнів</span></li>
           </ul>
         </div>
-        <div class="service">
+        <div class="service" id="site-ads">
           <div class="badge">03</div>
-          <h3>Настройка рекламы</h3>
-          <p>Запускаем и ведём контекстную и таргетированную рекламу с оптимизацией на стоимость заявки, а не клика.</p>
+          <h3>Реклама на сайт</h3>
+          <p>Запускаємо і ведемо контекстну та таргетовану рекламу з оптимізацією на вартість заявки, а не кліку.</p>
           <ul>
-            <li>Яндекс.Директ, Google Ads<span>вкл.</span></li>
-            <li>Таргет и ретаргетинг<span>вкл.</span></li>
-            <li>Запуск кампании<span>от 3 дней</span></li>
+            <li>Google Ads<span>вкл.</span></li>
+            <li>Таргет і ретаргетинг<span>вкл.</span></li>
+            <li>Запуск кампанії<span>від 3 днів</span></li>
           </ul>
         </div>
       </div>
@@ -356,26 +370,26 @@
   <section id="process">
     <div class="container">
       <div class="sec-head reveal">
-        <div class="sec-tag">Процесс</div>
-        <h2>Как проходит работа</h2>
-        <p>Четыре недели от брифа до первых заявок — дальше сайт работает на вас на постоянной основе.</p>
+        <div class="sec-tag">Процес</div>
+        <h2>Як проходить робота</h2>
+        <p>Чотири тижні від брифу до перших заявок — далі сайт працює на вас на постійній основі.</p>
       </div>
       <div class="steps reveal">
         <div class="step">
           <div class="idx">01</div>
-          <div><h4>Бриф и структура</h4><p>Разбираем задачу, конкурентов и путь клиента, готовим план сайта.</p><div class="when">Неделя 1</div></div>
+          <div><h3>Бриф і структура</h3><p>Розбираємо завдання, конкурентів і шлях клієнта, готуємо план сайту.</p><div class="when">Тиждень 1</div></div>
         </div>
         <div class="step">
           <div class="idx">02</div>
-          <div><h4>Дизайн и разработка</h4><p>Собираем сайт, согласовываем правки, готовим к публикации.</p><div class="when">Неделя 2</div></div>
+          <div><h3>Дизайн і розробка</h3><p>Збираємо сайт, узгоджуємо правки, готуємо до публікації.</p><div class="when">Тиждень 2</div></div>
         </div>
         <div class="step">
           <div class="idx">03</div>
-          <div><h4>Запуск и SEO-база</h4><p>Публикуем сайт, настраиваем аналитику, индексацию и первые SEO-правки.</p><div class="when">Неделя 3</div></div>
+          <div><h3>Запуск і SEO-база</h3><p>Публікуємо сайт, налаштовуємо аналітику, індексацію та перші SEO-правки.</p><div class="when">Тиждень 3</div></div>
         </div>
         <div class="step">
           <div class="idx">04</div>
-          <div><h4>Реклама включена</h4><p>Запускаем рекламные кампании — заявки начинают приходить уже на этой неделе.</p><div class="when">Неделя 4</div></div>
+          <div><h3>Реклама увімкнена</h3><p>Запускаємо рекламні кампанії — заявки починають надходити вже цього тижня.</p><div class="when">Тиждень 4</div></div>
         </div>
       </div>
     </div>
@@ -384,27 +398,27 @@
   <section id="pricing">
     <div class="container">
       <div class="sec-head reveal">
-        <div class="sec-tag">Тарифы</div>
-        <h2>Прозрачная смета — без «уточним после встречи»</h2>
-        <p>Все тарифы включают разработку сайта. SEO и реклама подключаются отдельно или пакетом «Под ключ».</p>
+        <div class="sec-tag">Тарифи</div>
+        <h2>Прозорий кошторис — без «уточнимо після зустрічі»</h2>
+        <p>Усі тарифи включають розробку сайту. SEO та реклама підключаються окремо або пакетом «Під ключ».</p>
       </div>
       <div class="table-wrap reveal">
         <table>
           <thead>
             <tr>
-              <th>Что входит</th>
-              <th class="price-col"><span class="plan-head">Сайт<span class="plan-price">от 45 000 ₽</span></span></th>
-              <th class="price-col"><span class="plan-head">Сайт + SEO<span class="plan-price">от 70 000 ₽</span></span></th>
-              <th class="price-col"><span class="plan-head">Под ключ<span class="plan-price">от 110 000 ₽</span></span></th>
+              <th>Що входить</th>
+              <th class="price-col"><span class="plan-head">Сайт<span class="plan-price">від 45 000 ₴</span></span></th>
+              <th class="price-col"><span class="plan-head">Сайт + SEO<span class="plan-price">від 70 000 ₴</span></span></th>
+              <th class="price-col"><span class="plan-head">Під ключ<span class="plan-price">від 110 000 ₴</span></span></th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Разработка и дизайн сайта</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
-            <tr><td>Мобильная адаптация</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
-            <tr><td>SEO-оптимизация и семантика</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
-            <tr><td>Настройка Директ / Google Ads</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
-            <tr><td>Ведение рекламы (ежемесячно)</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
-            <tr><td>Ежемесячный отчёт</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Розробка та дизайн сайту</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Мобільна адаптація</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>SEO-оптимізація і семантика</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Налаштування Google Ads</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Ведення реклами (щомісячно)</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Щомісячний звіт</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -414,25 +428,25 @@
   <section id="faq">
     <div class="container">
       <div class="sec-head reveal">
-        <div class="sec-tag">Вопросы</div>
-        <h2>Частые вопросы</h2>
+        <div class="sec-tag">Питання</div>
+        <h2>Часті запитання</h2>
       </div>
       <div class="reveal">
         <div class="faq-item">
-          <h4>Нужен ли сразу весь пакет?</h4>
-          <p>Нет. Многие начинают с сайта, смотрят на первые обращения, а SEO и рекламу подключают через 2–4 недели.</p>
+          <h3>Чи потрібен одразу весь пакет?</h3>
+          <p>Ні. Багато хто починає із сайту, дивиться на перші звернення, а SEO і рекламу підключає через 2–4 тижні.</p>
         </div>
         <div class="faq-item">
-          <h4>Кто оплачивает бюджет на рекламу?</h4>
-          <p>Рекламный бюджет всегда отдельно от оплаты за настройку и ведение — идёт напрямую в Яндекс или Google с вашего счёта.</p>
+          <h3>Хто оплачує бюджет на рекламу?</h3>
+          <p>Рекламний бюджет завжди окремо від оплати за налаштування і ведення — йде напряму в Google з вашого рахунку.</p>
         </div>
         <div class="faq-item">
-          <h4>Что если сайт уже есть?</h4>
-          <p>Проведём аудит текущего сайта, покажем, что мешает продвижению и рекламе, и предложим доработки без переделки с нуля.</p>
+          <h3>Що якщо сайт вже є?</h3>
+          <p>Проведемо аудит поточного сайту, покажемо, що заважає просуванню й рекламі, і запропонуємо доопрацювання без переробки з нуля.</p>
         </div>
         <div class="faq-item">
-          <h4>Гарантируете топ-1 в Google?</h4>
-          <p>Никто не может гарантировать конкретную позицию — это зависит и от алгоритмов поисковиков. Мы показываем прогресс по выдаче каждый месяц и работаем до устойчивого роста трафика.</p>
+          <h3>Чи гарантуєте топ-1 у Google?</h3>
+          <p>Ніхто не може гарантувати конкретну позицію — це залежить і від алгоритмів пошуковика. Ми показуємо прогрес у видачі щомісяця і працюємо до стійкого зростання трафіку.</p>
         </div>
       </div>
     </div>
@@ -440,15 +454,15 @@
 
   <section class="cta-section" id="cta">
     <div class="container">
-      <div class="sec-tag reveal">Начать проект</div>
-      <h2 class="reveal">Готовы обсудить ваш сайт?</h2>
-      <p class="hero-sub reveal">Оставьте контакт — за один звонок разберём задачу и предложим этапы и бюджет.</p>
-      <form class="cta-form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Заявка принята ✓';">
-        <input type="text" placeholder="Ваше имя" required>
-        <input type="tel" placeholder="Телефон или Telegram" required>
-        <button type="submit">Отправить</button>
+      <div class="sec-tag reveal">Почати проєкт</div>
+      <h2 class="reveal">Готові обговорити ваш сайт?</h2>
+      <p class="hero-sub reveal">Залиште контакт — за один дзвінок розберемо завдання і запропонуємо етапи та бюджет.</p>
+      <form class="cta-form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Заявку прийнято ✓';">
+        <input type="text" placeholder="Ваше ім'я" required>
+        <input type="tel" placeholder="Телефон або Telegram" required>
+        <button type="submit">Надіслати</button>
       </form>
-      <div class="cta-fine">Отвечаем в течение рабочего дня.</div>
+      <div class="cta-fine">Відповідаємо протягом робочого дня.</div>
     </div>
   </section>
 
@@ -459,24 +473,24 @@
     <div class="foot-grid">
       <div>
         <div class="logo" style="margin-bottom:14px;"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
-        <p style="max-width:280px;">Создание сайтов, SEO-продвижение и настройка рекламы под одной сметой и одним подрядчиком.</p>
+        <p style="max-width:280px;">Створення сайтів, SEO-просування та налаштування реклами під одним кошторисом і одним підрядником.</p>
       </div>
       <div>
-        <h5>Услуги</h5>
-        <a href="#services">Создание сайта</a>
-        <a href="#services">SEO-продвижение</a>
-        <a href="#services">Настройка рекламы</a>
+        <h3>Послуги</h3>
+        <a href="#site-creation">Створення сайту</a>
+        <a href="#site-promotion">Просування сайту</a>
+        <a href="#site-ads">Реклама на сайт</a>
       </div>
       <div>
-        <h5>Контакты</h5>
+        <h3>Контакти</h3>
         <a href="mailto:hello@seo-adspro.web.app">hello@seo-adspro.web.app</a>
-        <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+        <a href="tel:+380680000000">+38 (068) 000-00-00</a>
         <a href="https://seo-adspro.web.app/">seo-adspro.web.app</a>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 SEO AdsPro. Все права защищены.</span>
-      <span>Создание сайтов · Продвижение · Реклама</span>
+      <span>© 2026 SEO AdsPro. Усі права захищені.</span>
+      <span>Створення сайтів · Просування · Реклама</span>
     </div>
   </div>
 </footer>
