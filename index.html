@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO AdsPro — создание сайтов, SEO-продвижение и настройка рекламы</title>
+<meta name="description" content="SEO AdsPro: создаём сайты, выводим их в топ Google и Яндекс и запускаем рекламу, которая окупается. Один подрядчик на весь путь — от разработки до заявок.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seo-adspro.web.app/">
+<meta name="theme-color" content="#14161a">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SEO AdsPro">
+<meta property="og:title" content="SEO AdsPro — сайты, SEO и реклама, которые выводят в топ">
+<meta property="og:description" content="Создание сайта, продвижение в поиске и настройка рекламы — под одним подрядчиком и одной сметой.">
+<meta property="og:url" content="https://seo-adspro.web.app/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SEO AdsPro — сайты, SEO и реклама, которые выводят в топ">
+<meta name="twitter:description" content="Создание сайта, продвижение в поиске и настройка рекламы — под одним подрядчиком и одной сметой.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='%23C9A227' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "SEO AdsPro",
+  "url": "https://seo-adspro.web.app/",
+  "description": "Создание сайтов, SEO-продвижение и настройка контекстной и таргетированной рекламы.",
+  "areaServed": "RU",
+  "priceRange": "₽₽",
+  "sameAs": []
+}
+</script>
+
+<style>
+  :root{
+    --bg:#14161a;
+    --surface:#1b1e24;
+    --surface-2:#22262e;
+    --border:#2e333c;
+    --ink:#f1efea;
+    --muted:#9a9690;
+    --gold:#c9a227;
+    --gold-dim:#4a3d17;
+    --sage:#5fa17d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:Georgia, "Times New Roman", serif;}
+  .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+  .container{max-width:1120px; margin:0 auto; padding:0 28px;}
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+
+  header{
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:50;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px; max-width:1120px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:9px;
+    font-family:Georgia, serif; font-weight:700; font-size:19px; letter-spacing:.01em;
+  }
+  .logo .mark{
+    width:26px; height:26px; background:var(--gold); color:var(--bg);
+    border-radius:5px; display:flex; align-items:center; justify-content:center;
+    font-family:Georgia, serif; font-weight:700; font-size:15px;
+  }
+  nav .links{display:flex; gap:30px; font-size:14.5px;}
+  nav .links a{color:var(--muted); text-decoration:none; transition:color .15s;}
+  nav .links a:hover{color:var(--ink);}
+  .nav-cta{
+    font-size:14px; color:var(--bg); background:var(--gold);
+    padding:10px 20px; border-radius:4px; text-decoration:none; font-weight:600;
+  }
+  @media (max-width:780px){ nav .links{display:none;} }
+
+  .hero{padding:88px 0 100px; border-bottom:1px solid var(--border);}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:center;}
+  @media (max-width:920px){ .hero-grid{grid-template-columns:1fr; gap:52px;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:13px; color:var(--gold); letter-spacing:.06em; text-transform:uppercase;
+    border:1px solid var(--gold-dim); background:rgba(201,162,39,.07);
+    padding:7px 14px; border-radius:20px; margin-bottom:26px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+  h1{
+    font-family:Georgia, "Times New Roman", serif; font-weight:700;
+    font-size:clamp(34px, 4.6vw, 52px); line-height:1.14; letter-spacing:-.005em;
+  }
+  h1 .accent{color:var(--gold); font-style:italic;}
+  .hero-sub{margin-top:22px; max-width:520px; font-size:16.5px; color:var(--muted);}
+  .hero-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold); color:#1a1508; font-weight:700;
+    padding:14px 26px; border-radius:5px; text-decoration:none; font-size:15px;
+  }
+  .btn-secondary{
+    border:1px solid var(--border); color:var(--ink); text-decoration:none;
+    padding:13px 24px; border-radius:5px; font-size:15px; font-weight:500;
+  }
+  .btn-secondary:hover{border-color:var(--gold);}
+
+  .trust-row{display:flex; gap:28px; margin-top:44px; flex-wrap:wrap;}
+  .trust-row div{font-size:13px; color:var(--muted);}
+  .trust-row b{display:block; font-family:Georgia,serif; font-size:22px; color:var(--ink); font-weight:700;}
+
+  .serp-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:22px; position:relative;
+  }
+  .serp-topbar{display:flex; align-items:center; gap:8px; padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:18px;}
+  .serp-topbar .lights{display:flex; gap:6px;}
+  .serp-topbar .lights span{width:9px; height:9px; border-radius:50%; background:var(--border);}
+  .serp-topbar .bar{
+    flex:1; background:var(--surface-2); border-radius:6px; padding:7px 12px;
+    font-size:12.5px; color:var(--muted);
+  }
+  .serp-badge{
+    position:absolute; top:-12px; right:22px;
+    background:var(--gold); color:#1a1508; font-size:12px; font-weight:700;
+    padding:6px 12px; border-radius:20px;
+  }
+  .serp-result{padding:14px 0; border-bottom:1px solid var(--border);}
+  .serp-result:last-child{border-bottom:none;}
+  .serp-rank{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .serp-rank .n{
+    width:22px; height:22px; border-radius:5px; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700;
+  }
+  .serp-result.top .n{background:var(--gold); color:#1a1508;}
+  .serp-result:not(.top) .n{background:var(--surface-2); color:var(--muted);}
+  .serp-url{font-size:12px; color:var(--sage);}
+  .serp-title{font-size:15px; color:#8ab4f8; margin:2px 0 4px;}
+  .serp-result:not(.top) .serp-title{color:var(--muted); font-size:13.5px;}
+  .serp-desc{font-size:12.5px; color:var(--muted);}
+  .serp-result:not(.top) .serp-desc{display:none;}
+
+  .stats{padding:56px 0; border-bottom:1px solid var(--border);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center;}
+  @media (max-width:760px){ .stats-grid{grid-template-columns:1fr 1fr;} }
+  .stats-grid b{display:block; font-family:Georgia,serif; font-size:34px; color:var(--gold); font-weight:700;}
+  .stats-grid span{font-size:13px; color:var(--muted); margin-top:6px; display:block;}
+
+  section{padding:96px 0; border-bottom:1px solid var(--border);}
+  .sec-head{margin-bottom:56px; max-width:640px;}
+  .sec-tag{font-size:12.5px; color:var(--gold); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:clamp(26px,3.2vw,36px); font-weight:700; margin-top:10px;}
+  .sec-head p{margin-top:14px; color:var(--muted); font-size:15.5px;}
+
+  .services{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+  @media (max-width:860px){ .services{grid-template-columns:1fr;} }
+  .service{background:var(--surface); padding:36px 30px;}
+  .service .badge{
+    width:38px; height:38px; border-radius:8px; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:Georgia,serif; font-weight:700; color:var(--gold); font-size:16px;
+    margin-bottom:22px;
+  }
+  .service h3{font-family:Georgia,serif; font-size:20px; margin-bottom:12px;}
+  .service p{color:var(--muted); font-size:14.5px; margin-bottom:20px;}
+  .service ul{list-style:none;}
+  .service li{
+    font-size:13.5px; color:var(--ink); padding:7px 0; border-top:1px solid var(--border);
+    display:flex; justify-content:space-between;
+  }
+  .service li:first-child{border-top:none;}
+  .service li span:last-child{color:var(--muted); font-size:12.5px;}
+
+  .steps{display:flex; flex-direction:column;}
+  .step{display:grid; grid-template-columns:64px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--border);}
+  .step:last-child{border-bottom:1px solid var(--border);}
+  .step .idx{font-family:Georgia,serif; font-size:15px; color:var(--gold); font-weight:700; padding-top:2px;}
+  .step h4{font-size:16.5px; font-weight:600; margin-bottom:6px;}
+  .step p{color:var(--muted); font-size:14.5px; max-width:600px;}
+  .step .when{font-size:12.5px; color:var(--muted); margin-top:6px;}
+
+  .table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:10px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px;}
+  thead th{
+    font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600;
+    text-align:left; padding:16px 18px; border-bottom:1px solid var(--border); background:var(--surface);
+  }
+  thead th.price-col{text-align:center;}
+  tbody td{padding:15px 18px; border-bottom:1px solid var(--border); background:var(--surface);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td.price-col{text-align:center;}
+  tbody tr td:first-child{color:var(--ink); font-weight:500; width:34%;}
+  .plan-head{font-family:Georgia,serif; font-weight:700; font-size:16px; color:var(--ink);}
+  .plan-price{display:block; color:var(--gold); font-size:13px; margin-top:4px; font-weight:600;}
+  .check{color:var(--sage); font-weight:700;}
+  .dash{color:var(--border);}
+
+  .faq-item{border-top:1px solid var(--border); padding:24px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--border);}
+  .faq-item h4{font-size:16px; font-weight:600; margin-bottom:8px;}
+  .faq-item p{color:var(--muted); font-size:14.5px; max-width:640px;}
+
+  .cta-section{padding:104px 0; text-align:center; border-bottom:none;}
+  .cta-section h2{max-width:600px; margin:0 auto 16px;}
+  .cta-section .hero-sub{margin:0 auto 34px;}
+  .cta-form{max-width:500px; margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+  .cta-form input{
+    flex:1; min-width:200px; background:var(--surface); border:1px solid var(--border);
+    color:var(--ink); padding:14px 16px; border-radius:5px; font-size:14px;
+    font-family:inherit;
+  }
+  .cta-form input::placeholder{color:var(--muted);}
+  .cta-form input:focus, a:focus-visible, button:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  .cta-form button{
+    background:var(--gold); border:none; color:#1a1508; font-weight:700;
+    padding:14px 24px; border-radius:5px; cursor:pointer; font-size:14px; font-family:inherit;
+  }
+  .cta-fine{margin-top:16px; font-size:12.5px; color:var(--muted);}
+
+  footer{padding:52px 0 40px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid var(--border);}
+  @media (max-width:700px){ .foot-grid{grid-template-columns:1fr; gap:28px;} }
+  .foot-grid h5{font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:14px;}
+  .foot-grid p, .foot-grid a{font-size:14px; color:var(--muted); text-decoration:none; display:block; margin-bottom:8px;}
+  .foot-grid a:hover{color:var(--ink);}
+  .foot-bottom{display:flex; justify-content:space-between; margin-top:24px; font-size:12.5px; color:var(--muted); flex-wrap:wrap; gap:10px;}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
+    <div class="links">
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">Вопросы</a>
+    </div>
+    <a class="nav-cta" href="#cta">Обсудить проект</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Создание · SEO · Реклама</span>
+        <h1>Сайт,gethab который находят.<br><span class="accent">И реклама, которая окупается.</span></h1>
+        <p class="hero-sub">SEO AdsPro строит сайты и выводит их на первые позиции в Google и Яндекс, а затем подключает рекламу, которая приносит заявки, а не просто клики.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#cta">Оставить заявку</a>
+          <a class="btn-secondary" href="#services">Услуги и цены</a>
+        </div>
+        <div class="trust-row">
+          <div><b>120+</b>сайтов запущено</div>
+          <div><b>топ-10</b>по ключевым запросам</div>
+          <div><b>4,9 / 5</b>средняя оценка клиентов</div>
+        </div>
+      </div>
+
+      <div class="serp-card reveal">
+        <span class="serp-badge">Позиция №1 · Google</span>
+        <div class="serp-topbar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="bar">google.com/search?q=ваша+услуга+ваш+город</div>
+        </div>
+        <div class="serp-result top">
+          <div class="serp-rank"><span class="n">1</span></div>
+          <div class="serp-url">ваш-сайт.ru</div>
+          <div class="serp-title">Ваша компания — официальный сайт</div>
+          <div class="serp-desc">Именно так выглядит цель: ваш сайт — первый результат по нужным клиенту запросам.</div>
+        </div>
+        <div class="serp-result">
+          <div class="serp-rank"><span class="n">2</span></div>
+          <div class="serp-title">Конкурент А</div>
+        </div>
+        <div class="serp-result">
+          <div class="serp-rank"><span class="n">3</span></div>
+          <div class="serp-title">Конкурент Б</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-grid reveal">
+      <div><b>7–14</b><span>дней на запуск сайта</span></div>
+      <div><b>4–8</b><span>недель до роста в выдаче</span></div>
+      <div><b>3</b><span>дня на запуск рекламы</span></div>
+      <div><b>1</b><span>подрядчик на весь путь</span></div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Услуги</div>
+        <h2>Три направления — один результат</h2>
+        <p>Берём проект целиком или подключаемся на любом этапе: сайт уже есть — усилим продвижением и рекламой.</p>
+      </div>
+
+      <div class="services reveal">
+        <div class="service">
+          <div class="badge">01</div>
+          <h3>Создание сайта</h3>
+          <p>Разрабатываем сайт под вашу задачу: визитку, каталог или сайт услуг, с фокусом на путь клиента к заявке.</p>
+          <ul>
+            <li>Дизайн и вёрстка<span>вкл.</span></li>
+            <li>Мобильная адаптация<span>вкл.</span></li>
+            <li>Срок разработки<span>7–14 дней</span></li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="badge">02</div>
+          <h3>SEO-продвижение</h3>
+          <p>Технически оптимизируем сайт, собираем семантику и пишем тексты под запросы, по которым вас ищут клиенты.</p>
+          <ul>
+            <li>SEO-аудит и семантика<span>вкл.</span></li>
+            <li>Яндекс.Карты и справочники<span>вкл.</span></li>
+            <li>Первые сдвиги в выдаче<span>4–8 недель</span></li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="badge">03</div>
+          <h3>Настройка рекламы</h3>
+          <p>Запускаем и ведём контекстную и таргетированную рекламу с оптимизацией на стоимость заявки, а не клика.</p>
+          <ul>
+            <li>Яндекс.Директ, Google Ads<span>вкл.</span></li>
+            <li>Таргет и ретаргетинг<span>вкл.</span></li>
+            <li>Запуск кампании<span>от 3 дней</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Процесс</div>
+        <h2>Как проходит работа</h2>
+        <p>Четыре недели от брифа до первых заявок — дальше сайт работает на вас на постоянной основе.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="idx">01</div>
+          <div><h4>Бриф и структура</h4><p>Разбираем задачу, конкурентов и путь клиента, готовим план сайта.</p><div class="when">Неделя 1</div></div>
+        </div>
+        <div class="step">
+          <div class="idx">02</div>
+          <div><h4>Дизайн и разработка</h4><p>Собираем сайт, согласовываем правки, готовим к публикации.</p><div class="when">Неделя 2</div></div>
+        </div>
+        <div class="step">
+          <div class="idx">03</div>
+          <div><h4>Запуск и SEO-база</h4><p>Публикуем сайт, настраиваем аналитику, индексацию и первые SEO-правки.</p><div class="when">Неделя 3</div></div>
+        </div>
+        <div class="step">
+          <div class="idx">04</div>
+          <div><h4>Реклама включена</h4><p>Запускаем рекламные кампании — заявки начинают приходить уже на этой неделе.</p><div class="when">Неделя 4</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Тарифы</div>
+        <h2>Прозрачная смета — без «уточним после встречи»</h2>
+        <p>Все тарифы включают разработку сайта. SEO и реклама подключаются отдельно или пакетом «Под ключ».</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Что входит</th>
+              <th class="price-col"><span class="plan-head">Сайт<span class="plan-price">от 45 000 ₽</span></span></th>
+              <th class="price-col"><span class="plan-head">Сайт + SEO<span class="plan-price">от 70 000 ₽</span></span></th>
+              <th class="price-col"><span class="plan-head">Под ключ<span class="plan-price">от 110 000 ₽</span></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Разработка и дизайн сайта</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Мобильная адаптация</td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>SEO-оптимизация и семантика</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Настройка Директ / Google Ads</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Ведение рекламы (ежемесячно)</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+            <tr><td>Ежемесячный отчёт</td><td class="price-col"><span class="dash">—</span></td><td class="price-col"><span class="check">✓</span></td><td class="price-col"><span class="check">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Вопросы</div>
+        <h2>Частые вопросы</h2>
+      </div>
+      <div class="reveal">
+        <div class="faq-item">
+          <h4>Нужен ли сразу весь пакет?</h4>
+          <p>Нет. Многие начинают с сайта, смотрят на первые обращения, а SEO и рекламу подключают через 2–4 недели.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Кто оплачивает бюджет на рекламу?</h4>
+          <p>Рекламный бюджет всегда отдельно от оплаты за настройку и ведение — идёт напрямую в Яндекс или Google с вашего счёта.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Что если сайт уже есть?</h4>
+          <p>Проведём аудит текущего сайта, покажем, что мешает продвижению и рекламе, и предложим доработки без переделки с нуля.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Гарантируете топ-1 в Google?</h4>
+          <p>Никто не может гарантировать конкретную позицию — это зависит и от алгоритмов поисковиков. Мы показываем прогресс по выдаче каждый месяц и работаем до устойчивого роста трафика.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="sec-tag reveal">Начать проект</div>
+      <h2 class="reveal">Готовы обсудить ваш сайт?</h2>
+      <p class="hero-sub reveal">Оставьте контакт — за один звонок разберём задачу и предложим этапы и бюджет.</p>
+      <form class="cta-form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Заявка принята ✓';">
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Телефон или Telegram" required>
+        <button type="submit">Отправить</button>
+      </form>
+      <div class="cta-fine">Отвечаем в течение рабочего дня.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
+        <p style="max-width:280px;">Создание сайтов, SEO-продвижение и настройка рекламы под одной сметой и одним подрядчиком.</p>
+      </div>
+      <div>
+        <h5>Услуги</h5>
+        <a href="#services">Создание сайта</a>
+        <a href="#services">SEO-продвижение</a>
+        <a href="#services">Настройка рекламы</a>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <a href="mailto:hello@seo-adspro.web.app">hello@seo-adspro.web.app</a>
+        <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+        <a href="https://seo-adspro.web.app/">seo-adspro.web.app</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SEO AdsPro. Все права защищены.</span>
+      <span>Создание сайтов · Продвижение · Реклама</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
