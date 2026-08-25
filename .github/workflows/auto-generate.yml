@@ -1,0 +1,39 @@
+name: Авто-генерация статей
+
+on:
+  schedule:
+    # Запуск каждый день в 09:00 UTC (12:00 по Киеву / 12:00 по МСК)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Кнопка для ручного запуска во вкладке Actions
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Выдача боту прав на сохранение файлов в репозитории
+
+    steps:
+      - name: 1. Скачиваем репозиторий
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 2. Устанавливаем Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 3. Запускаем генератор статьи
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node generate.js
+
+      - name: 4. Публикуем созданную статью и обновленный index.html в GitHub
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add articles/
+          git status
+          git commit -m "Auto-generated new article [skip ci]" || exit 0
+          git push origin main
