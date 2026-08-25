@@ -1,32 +1,47 @@
-name: Авто-генерация статей
+yml_content = """name: Авто-генерация статей
 
 on:
   schedule:
-    # Каждый день в 09:00 UTC
+    # Запуск каждый день в 09:00 UTC
     - cron: '0 9 * * *'
-  workflow_dispatch: # Позволяет запустить вручную кнопкой в GitHub
+  workflow_dispatch: # Позволяет запускать вручную кнопкой в интерфейсе GitHub
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    steps:
-      - name: Скачиваем репозиторий
-        uses: actions/checkout@v4
+    permissions:
+      contents: write # Выдача боту прав на чтение и запись в репозиторий
 
-      - name: Устанавливаем Node.js
+    steps:
+      - name: 1. Скачиваем репозиторий
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 2. Устанавливаем Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Запускаем генератор статьи
+      - name: 3. Запускаем генератор статьи
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node generate.js
 
-      - name: Сохраняем новую статью обратно в GitHub
+      - name: 4. Публикуем созданную статью и обновленный index.html в GitHub
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
           git add articles/
-          git commit -m "Auto-generated new article" || exit 0
-          git push
+          git status
+          git commit -m "Auto-generated new article [skip ci]" || exit 0
+          git push origin main
+"""
+
+import os
+os.makedirs(".github/workflows", exist_ok=True)
+with open(".github/workflows/auto-generate.yml", "w", encoding="utf-8") as f:
+    f.write(yml_content)
+
+print("Files generated successfully.")
