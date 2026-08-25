@@ -4,12 +4,14 @@ const path = require('path');
 const API_KEY = process.env.GEMINI_API_KEY;
 
 async function generateArticle() {
+  const articlesDir = path.join(__dirname, 'articles');
+
   if (!API_KEY) {
-    console.error("Ошибка: API ключ GEMINI_API_KEY не найден в переменных окружения!");
-    process.exit(1);
+    console.warn("Предупреждение: GEMINI_API_KEY не найден. Генерация статьи пропущена, пересобираем articles/index.html...");
+    updateArticlesIndex(articlesDir);
+    return;
   }
 
-  // Темы для генерации на украинском языке под стиль сайта
   const topics = [
     "Як оптимізувати сайт для пошукових систем (SEO) у 2026 році",
     "Правильне налаштування реклами Google Ads: як не злити бюджет",
@@ -51,29 +53,21 @@ async function generateArticle() {
     }
 
     let articleBody = data.candidates[0].content.parts[0].text.trim();
-    
-    // Очистка от возможных разделителей markdown
     articleBody = articleBody.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
 
-    // Извлекаем заголовок из первого <h1>
     const titleMatch = articleBody.match(/<h1>(.*?)<\/h1>/i);
     const articleTitle = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : selectedTopic;
-    
-    // Удаляем из articleBody заголовок <h1>, так как вынесем его в красивую обертку
     articleBody = articleBody.replace(/<h1>.*?<\/h1>/i, '').trim();
 
-    // Генерируем имя файла
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
     const timeHash = Date.now().toString().slice(-4);
     const fileName = `article-${dateStr}-${timeHash}.html`;
-    const articlesDir = path.join(__dirname, 'articles');
 
     if (!fs.existsSync(articlesDir)) {
       fs.mkdirSync(articlesDir, { recursive: true });
     }
 
-    // Собираем полный HTML-документ отдельной статьи с шапкой, футером и стилями сайта
     const fullHtml = `<!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -155,7 +149,6 @@ async function generateArticle() {
     fs.writeFileSync(filePath, fullHtml, 'utf8');
     console.log(` Успешно создана новая статья: articles/${fileName}`);
 
-    // Автоматически обновляем общий список в articles/index.html
     updateArticlesIndex(articlesDir);
 
   } catch (err) {
@@ -166,31 +159,32 @@ async function generateArticle() {
 
 function updateArticlesIndex(articlesDir) {
   console.log(" Обновляем файл articles/index.html...");
-  
-  // Читаем ВСЕ .html файлы в папке, за исключением index.html
+
+  if (!fs.existsSync(articlesDir)) {
+    fs.mkdirSync(articlesDir, { recursive: true });
+  }
+
+  // Сканируем все HTML файлы кроме самого index.html
   const files = fs.readdirSync(articlesDir)
-    .filter(file => file.endsWith('.html') && file.toLowerCase() !== 'index.html');
+    .filter(file => file.toLowerCase().endsWith('.html') && file.toLowerCase() !== 'index.html');
 
   const items = files.map(file => {
     const filePath = path.join(articlesDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
     
-    // Поиск заголовка в <title> или <h1> (с очисткой от тегов и брендового префикса)
     const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/i) || content.match(/<title>(.*?)<\/title>/i);
     let title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(' — SEO AdsPro', '').trim() : file;
     
     if (!title || title === '') {
-      title = file.replace('.html', '');
+      title = file.replace(/\.html$/i, '');
     }
 
     const stat = fs.statSync(filePath);
     return { file, title, mtime: stat.mtimeMs };
   });
 
-  // Сортировка: самые свежие статьи вверху
   items.sort((a, b) => b.mtime - a.mtime);
 
-  // Формируем карточки статей
   const cardsList = items.length > 0 ? items.map((item, idx) => {
     const num = String(idx + 1).padStart(2, '0');
     return `        <a class="article-card" href="${item.file}">
@@ -203,7 +197,6 @@ function updateArticlesIndex(articlesDir) {
         </a>`;
   }).join('\n') : '<p style="color:var(--muted); text-align:center; width:100%;">Поки що немає опублікованих статей.</p>';
 
-  // Генерируем articles/index.html
   const indexHtml = `<!DOCTYPE html>
 <html lang="uk">
 <head>
