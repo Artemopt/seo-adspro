@@ -1,16 +1,16 @@
-yml_content = """name: Авто-генерация статей
+name: Авто-генерация статей
 
 on:
   schedule:
-    # Запуск каждый день в 09:00 UTC
+    # Запуск каждый день в 09:00 UTC (12:00 по Киеву / 12:00 по МСК)
     - cron: '0 9 * * *'
-  workflow_dispatch: # Позволяет запускать вручную кнопкой в интерфейсе GitHub
+  workflow_dispatch: # Кнопка для ручного запуска во вкладке Actions
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Выдача боту прав на чтение и запись в репозиторий
+      contents: write # Выдача боту прав на сохранение файлов в репозитории
 
     steps:
       - name: 1. Скачиваем репозиторий
@@ -37,11 +37,3 @@ jobs:
           git status
           git commit -m "Auto-generated new article [skip ci]" || exit 0
           git push origin main
-"""
-
-import os
-os.makedirs(".github/workflows", exist_ok=True)
-with open(".github/workflows/auto-generate.yml", "w", encoding="utf-8") as f:
-    f.write(yml_content)
-
-print("Files generated successfully.")

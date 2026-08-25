@@ -1,15 +1,15 @@
-generate_js_content = """const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
 async function generateArticle() {
   if (!API_KEY) {
-    console.error("Ошибка: API ключ GEMINI_API_KEY не найден в переменном окружении!");
+    console.error("Ошибка: API ключ GEMINI_API_KEY не найден в переменных окружения!");
     process.exit(1);
   }
 
-  // Темы для генерации (выбираются случайно для разнообразия)
+  // Темы для случайного выбора при генерации
   const topics = [
     "Как оптимизировать сайт для поисковых систем (SEO) в 2026 году",
     "Правильная настройка рекламы Google Ads: как не сливать бюджет",
@@ -25,7 +25,7 @@ async function generateArticle() {
 Требования:
 1. Верни ТОЛЬКО чистый HTML-код без разметки markdown (без \`\`\`html или \`\`\`).
 2. Не используй теги <html>, <head> или <body>.
-3. Начни прямо с тега <h1>, в котором укажи заголовк статьи.
+3. Начни прямо с тега <h1>, в котором укажи заголовок статьи.
 4. Разбей текст на логические блоки с помощью тегов <h2>, <p>, <ul>, <li>, <strong>.
 5. Объем статьи: около 400-600 слов.
 6. Язык статьи: русский.`;
@@ -33,7 +33,7 @@ async function generateArticle() {
   console.log(`Запрашиваем статью у Gemini API на тему: "${selectedTopic}"...`);
   
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+    const response = await fetch(`[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$){API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -53,11 +53,11 @@ async function generateArticle() {
     // Очистка от возможных разделителей markdown
     articleBody = articleBody.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
 
-    // Извлекаем заголовок из первого H1
+    // Извлекаем заголовок из первого <h1>
     const titleMatch = articleBody.match(/<h1>(.*?)<\/h1>/i);
     const articleTitle = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : selectedTopic;
 
-    // Генерируем уникальное имя файла и путь
+    // Генерируем имя файла
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
     const timeHash = Date.now().toString().slice(-4);
@@ -122,22 +122,18 @@ function updateArticlesIndex(articlesDir) {
   const files = fs.readdirSync(articlesDir)
     .filter(file => file.endsWith('.html') && file !== 'index.html');
 
-  // Формируем элементы списка
+  // Достаем заголовки из каждой статьи
   const items = files.map(file => {
     const filePath = path.join(articlesDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
     
-    // Достаем заголовок из <title>
     const titleMatch = content.match(/<title>(.*?)<\/title>/i);
     const title = titleMatch ? titleMatch[1].trim() : file;
 
-    return {
-      file: file,
-      title: title
-    };
+    return { file, title };
   });
 
-  // Новые статьи первыми (по имени файла или порядку)
+  // Сортируем: новые статьи будут вверху
   items.reverse();
 
   const linksList = items.map(item => {
@@ -161,7 +157,7 @@ function updateArticlesIndex(articlesDir) {
         }
         h1 { color: #1a252f; border-bottom: 2px solid #eee; padding-bottom: 12px; }
         ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 14px; padding: 12px 16px; background: #f8f9fa; border-radius: 6px; transition: background 0.2s; }
+        li { margin-bottom: 14px; padding: 12px 16px; background: #f8f9fa; border-radius: 6px; }
         li:hover { background: #e9ecef; }
         a { color: #0066cc; text-decoration: none; font-size: 1.1em; font-weight: 500; display: block; }
         a:hover { text-decoration: underline; }
@@ -180,7 +176,3 @@ ${linksList}
 }
 
 generateArticle();
-"""
-
-with open("generate.js", "w", encoding="utf-8") as f:
-    f.write(generate_js_content)
