@@ -37,3 +37,11 @@ jobs:
           git status
           git commit -m "Auto-generated new article [skip ci]" || exit 0
           git push origin main
+          
+          - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SEO_ADSPRO }}'
+          channelId: live
+          projectId: seo-adspro
