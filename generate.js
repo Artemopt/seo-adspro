@@ -9,26 +9,26 @@ async function generateArticle() {
     process.exit(1);
   }
 
-  // Темы для случайного выбора при генерации
+  // Темы для генерации на украинском языке под стиль сайта
   const topics = [
-    "Как оптимизировать сайт для поисковых систем (SEO) в 2026 году",
-    "Правильная настройка рекламы Google Ads: как не сливать бюджет",
-    "Как веб-дизайн и UX влияют на конверсию интернет-магазина",
-    "Что такое контент-маркетинг и как он помогает привлекать клиентов",
-    "Скорость загрузки сайта (Core Web Vitals) и её влияние на SEO",
-    "Зачем бизнесу нужен блог и как регулярно писать полезные статьи"
+    "Як оптимізувати сайт для пошукових систем (SEO) у 2026 році",
+    "Правильне налаштування реклами Google Ads: як не злити бюджет",
+    "Як веб-дизайн та UX впливають на конверсію інтернет-магазину",
+    "Що таке контент-маркетинг і як він допомагає залучати клієнтів",
+    "Швидкість завантаження сайту (Core Web Vitals) та її вплив на SEO",
+    "Навіщо бізнесу потрібен блог і як регулярно писати корисні статті"
   ];
   
   const selectedTopic = topics[Math.floor(Math.random() * topics.length)];
 
-  const prompt = `Напиши интересную, структурированную и полезную статью на тему: "${selectedTopic}".
-Требования:
-1. Верни ТОЛЬКО чистый HTML-код без разметки markdown (без \`\`\`html или \`\`\`).
-2. Не используй теги <html>, <head> или <body>.
-3. Начни прямо с тега <h1>, в котором укажи заголовок статьи.
-4. Разбей текст на логические блоки с помощью тегов <h2>, <p>, <ul>, <li>, <strong>.
-5. Объем статьи: около 400-600 слов.
-6. Язык статьи: русский.`;
+  const prompt = `Напиши цікаву, структуровану та корисну статтю українською мовою на тему: "${selectedTopic}".
+Вимоги:
+1. Поверни ТІЛЬКИ чистий HTML-код без розмітки markdown (без \`\`\`html або \`\`\`).
+2. Не використовуй теги <html>, <head> або <body>.
+3. Почни прямо з тегу <h1>, у якому вкажи заголовок статті.
+4. Розбий текст на логічні блоки за допомогою тегів <h2>, <p>, <ul>, <li>, <strong>.
+5. Обсяг статті: близько 400-600 слів.
+6. Мова статті: українська.`;
 
   console.log(`Запрашиваем статью у Gemini API на тему: "${selectedTopic}"...`);
   
@@ -58,6 +58,9 @@ async function generateArticle() {
     // Извлекаем заголовок из первого <h1>
     const titleMatch = articleBody.match(/<h1>(.*?)<\/h1>/i);
     const articleTitle = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : selectedTopic;
+    
+    // Удаляем из articleBody заголовок <h1>, так как вынесем его в красивую обертку
+    articleBody = articleBody.replace(/<h1>.*?<\/h1>/i, '').trim();
 
     // Генерируем имя файла
     const now = new Date();
@@ -70,38 +73,81 @@ async function generateArticle() {
       fs.mkdirSync(articlesDir, { recursive: true });
     }
 
-    // Собираем полный HTML-документ статьи
+    // Собираем полный HTML-документ отдельной статьи с шапкой, футером и стилями сайта
     const fullHtml = `<!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${articleTitle}</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.7;
-            color: #2c3e50;
-            background-color: #fff;
-        }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .back-link { margin-bottom: 20px; display: inline-block; font-weight: 500; }
-        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0 30px 0; }
-        h1 { font-size: 2.2em; color: #1a252f; line-height: 1.3; }
-        h2 { font-size: 1.5em; margin-top: 30px; color: #2c3e50; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
-        p { margin: 16px 0; font-size: 1.05em; }
-        ul, ol { padding-left: 24px; margin: 16px 0; }
-        li { margin-bottom: 8px; font-size: 1.05em; }
-    </style>
+    <title>${articleTitle} — SEO AdsPro</title>
+    <meta name="description" content="${articleTitle}">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='%23C9A227' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <a href="/articles/index.html" class="back-link">← Все статьи</a>
-    <hr>
-    ${articleBody}
+
+<header>
+  <nav>
+    <a href="../index.html" class="logo"><span class="mark">S</span>SEO&nbsp;AdsPro</a>
+    <div class="links">
+      <a href="../index.html#site-creation">Створення сайту</a>
+      <a href="../index.html#site-promotion">Просування сайту</a>
+      <a href="../index.html#site-ads">Реклама на сайт</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="../index.html#process">Процес</a>
+      <a href="../index.html#pricing">Тарифи</a>
+      <a href="../index.html#faq">Питання</a>
+      <a class="is-service" href="index.html">Статті</a>
+    </div>
+    <a class="nav-cta" href="../index.html#cta">Обговорити проєкт</a>
+  </nav>
+</header>
+
+<main>
+  <article style="padding: 60px 0 100px;">
+    <div class="container" style="max-width: 800px;">
+      <a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 14px; font-weight: 600;">← Назад до усіх статей</a>
+      
+      <h1 style="margin-top: 24px; font-family: Georgia, serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.2;">${articleTitle}</h1>
+      <div style="color: var(--muted); font-size: 14px; margin: 16px 0 40px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+        SEO та реклама · 5 хв читання
+      </div>
+
+      <div class="article-content" style="color: var(--ink); line-height: 1.75; font-size: 16.5px;">
+        ${articleBody}
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
+        <p style="max-width:280px;">Створення сайтів, SEO-просування та налаштування реклами під одним кошторисом і одним підрядником.</p>
+      </div>
+      <div>
+        <h3>Послуги</h3>
+        <a href="../index.html#site-creation">Створення сайту</a>
+        <a href="../index.html#site-promotion">Просування сайту</a>
+        <a href="../index.html#site-ads">Реклама на сайт</a>
+        <a href="index.html">Статті</a>
+      </div>
+      <div>
+        <h3>Контакти</h3>
+        <a href="mailto:hello@seo-adspro.web.app">hello@seo-adspro.web.app</a>
+        <a href="tel:+380680000000">+38 (068) 000-00-00</a>
+        <a href="[https://seo-adspro.web.app/](https://seo-adspro.web.app/)">seo-adspro.web.app</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SEO AdsPro. Усі права захищені.</span>
+      <span>Створення сайтів · Просування · Реклама</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>`;
 
@@ -130,8 +176,8 @@ function updateArticlesIndex(articlesDir) {
     const content = fs.readFileSync(filePath, 'utf8');
     
     // Поиск заголовка из <title> или <h1>
-    const titleMatch = content.match(/<title>(.*?)<\/title>/i) || content.match(/<h1>(.*?)<\/h1>/i);
-    const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : file;
+    const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/i) || content.match(/<title>(.*?)<\/title>/i);
+    const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(' — SEO AdsPro', '').trim() : file;
     const stat = fs.statSync(filePath);
 
     return { file, title, mtime: stat.mtimeMs };
@@ -140,65 +186,106 @@ function updateArticlesIndex(articlesDir) {
   // Сортировка: самые свежие статьи вверху
   items.sort((a, b) => b.mtime - a.mtime);
 
-  // Формируем ссылки относительно папки articles/
-  const linksList = items.map(item => {
-    return `        <li><a href="${item.file}">${item.title}</a></li>`;
+  // Формируем стильные карточки статей под общий дизайн
+  const cardsList = items.map((item, idx) => {
+    const num = String(idx + 1).padStart(2, '0');
+    return `        <a class="article-card" href="${item.file}">
+          <div class="article-cover"><span class="kicker">${num} · Стаття</span></div>
+          <div class="article-card-body">
+            <div class="article-meta">Блог SEO AdsPro · 5 хв читання</div>
+            <h3>${item.title}</h3>
+            <span class="article-read">Читати статтю →</span>
+          </div>
+        </a>`;
   }).join('\n');
 
+  // Генерируем красивый articles/index.html с шапкой и футером
   const indexHtml = `<!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Блог — Все статьи</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.6;
-            color: #2c3e50;
-            background-color: #f8f9fa;
-        }
-        .header { margin-bottom: 30px; }
-        .back-home { display: inline-block; margin-bottom: 15px; color: #0066cc; text-decoration: none; font-weight: 500; }
-        .back-home:hover { text-decoration: underline; }
-        h1 { font-size: 2em; color: #1a252f; margin: 0 0 10px 0; }
-        p.subtitle { color: #6c757d; margin: 0; }
-        ul.article-list { list-style: none; padding: 0; margin: 30px 0 0 0; }
-        ul.article-list li { margin-bottom: 12px; }
-        ul.article-list a {
-            display: block;
-            padding: 18px 22px;
-            background: #ffffff;
-            color: #1a252f;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 600;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-            transition: all 0.2s ease;
-        }
-        ul.article-list a:hover {
-            border-color: #0066cc;
-            color: #0066cc;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,102,204,0.1);
-        }
-    </style>
+    <title>Статті та Блог — SEO AdsPro</title>
+    <meta name="description" content="Корисні статті про створення сайтів, SEO-просування та налаштування Google Ads от SEO AdsPro.">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='22' font-size='17' font-family='Georgia,serif' fill='%23C9A227' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <div class="header">
-        <a href="/" class="back-home">← На главную</a>
-        <h1>Список всех статей</h1>
-        <p class="subtitle">Полезные материалы по SEO, контекстной рекламе и веб-разработке</p>
+
+<header>
+  <nav>
+    <a href="../index.html" class="logo"><span class="mark">S</span>SEO&nbsp;AdsPro</a>
+    <div class="links">
+      <a href="../index.html#site-creation">Створення сайту</a>
+      <a href="../index.html#site-promotion">Просування сайту</a>
+      <a href="../index.html#site-ads">Реклама на сайт</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="../index.html#process">Процес</a>
+      <a href="../index.html#pricing">Тарифи</a>
+      <a href="../index.html#faq">Питання</a>
+      <a class="is-service" href="index.html">Статті</a>
     </div>
-    <ul class="article-list">
-${linksList}
-    </ul>
+    <a class="nav-cta" href="../index.html#cta">Обговорити проєкт</a>
+  </nav>
+</header>
+
+<main>
+  <section id="articles" style="padding: 60px 0 100px;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Блог</div>
+        <h2>Статті про сайти, SEO та рекламу</h2>
+        <p>Коротко й по суті — те, що ми самі розповідаємо клієнтам перед стартом проєкту.</p>
+      </div>
+
+      <div class="articles-grid reveal">
+${cardsList}
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="mark">S</span>SEO&nbsp;AdsPro</div>
+        <p style="max-width:280px;">Створення сайтів, SEO-просування та налаштування реклами під одним кошторисом і одним підрядником.</p>
+      </div>
+      <div>
+        <h3>Послуги</h3>
+        <a href="../index.html#site-creation">Створення сайту</a>
+        <a href="../index.html#site-promotion">Просування сайту</a>
+        <a href="../index.html#site-ads">Реклама на сайт</a>
+        <a href="index.html">Статті</a>
+      </div>
+      <div>
+        <h3>Контакти</h3>
+        <a href="mailto:hello@seo-adspro.web.app">hello@seo-adspro.web.app</a>
+        <a href="tel:+380680000000">+38 (068) 000-00-00</a>
+        <a href="[https://seo-adspro.web.app/](https://seo-adspro.web.app/)">seo-adspro.web.app</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SEO AdsPro. Усі права захищені.</span>
+      <span>Створення сайтів · Просування · Реклама</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
 </body>
 </html>`;
 
