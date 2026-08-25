@@ -30,6 +30,15 @@ jobs:
         run: node generate.js
 
       - name: 4. Публикуем созданную статью и обновленный index.html в GitHub
+      
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SEO_ADSPRO }}'
+          channelId: live
+          projectId: seo-adspro
+          
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
@@ -38,10 +47,4 @@ jobs:
           git commit -m "Auto-generated new article [skip ci]" || exit 0
           git push origin main
           
-          - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SEO_ADSPRO }}'
-          channelId: live
-          projectId: seo-adspro
+ 
