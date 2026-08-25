@@ -175,19 +175,23 @@ function updateArticlesIndex(articlesDir) {
     const filePath = path.join(articlesDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
     
-    // Поиск заголовка из <title> или <h1>
+    // Поиск заголовка в <title> или <h1> (с очисткой от тегов и брендового префикса)
     const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/i) || content.match(/<title>(.*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(' — SEO AdsPro', '').trim() : file;
-    const stat = fs.statSync(filePath);
+    let title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(' — SEO AdsPro', '').trim() : file;
+    
+    if (!title || title === '') {
+      title = file.replace('.html', '');
+    }
 
+    const stat = fs.statSync(filePath);
     return { file, title, mtime: stat.mtimeMs };
   });
 
   // Сортировка: самые свежие статьи вверху
   items.sort((a, b) => b.mtime - a.mtime);
 
-  // Формируем стильные карточки статей под общий дизайн
-  const cardsList = items.map((item, idx) => {
+  // Формируем карточки статей
+  const cardsList = items.length > 0 ? items.map((item, idx) => {
     const num = String(idx + 1).padStart(2, '0');
     return `        <a class="article-card" href="${item.file}">
           <div class="article-cover"><span class="kicker">${num} · Стаття</span></div>
@@ -197,9 +201,9 @@ function updateArticlesIndex(articlesDir) {
             <span class="article-read">Читати статтю →</span>
           </div>
         </a>`;
-  }).join('\n');
+  }).join('\n') : '<p style="color:var(--muted); text-align:center; width:100%;">Поки що немає опублікованих статей.</p>';
 
-  // Генерируем красивый articles/index.html с шапкой и футером
+  // Генерируем articles/index.html
   const indexHtml = `<!DOCTYPE html>
 <html lang="uk">
 <head>
