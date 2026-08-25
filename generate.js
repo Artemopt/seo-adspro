@@ -33,8 +33,7 @@ async function generateArticle() {
   console.log(`Запрашиваем статью у Gemini API на тему: "${selectedTopic}"...`);
   
   try {
-    // Используем актуальную модель gemini-2.5-flash
-	const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
     
     const response = await fetch(url, {
       method: 'POST',
@@ -122,25 +121,28 @@ async function generateArticle() {
 function updateArticlesIndex(articlesDir) {
   console.log(" Обновляем файл articles/index.html...");
   
+  // Читаем ВСЕ .html файлы в папке, за исключением index.html
   const files = fs.readdirSync(articlesDir)
-    .filter(file => file.endsWith('.html') && file !== 'index.html');
+    .filter(file => file.endsWith('.html') && file.toLowerCase() !== 'index.html');
 
-  // Достаем заголовки из каждой статьи
   const items = files.map(file => {
     const filePath = path.join(articlesDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
     
-    const titleMatch = content.match(/<title>(.*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1].trim() : file;
+    // Поиск заголовка из <title> или <h1>
+    const titleMatch = content.match(/<title>(.*?)<\/title>/i) || content.match(/<h1>(.*?)<\/h1>/i);
+    const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : file;
+    const stat = fs.statSync(filePath);
 
-    return { file, title };
+    return { file, title, mtime: stat.mtimeMs };
   });
 
-  // Сортируем: новые статьи будут вверху
-  items.reverse();
+  // Сортировка: самые свежие статьи вверху
+  items.sort((a, b) => b.mtime - a.mtime);
 
+  // Формируем ссылки относительно папки articles/
   const linksList = items.map(item => {
-    return `        <li><a href="/articles/${item.file}">${item.title}</a></li>`;
+    return `        <li><a href="${item.file}">${item.title}</a></li>`;
   }).join('\n');
 
   const indexHtml = `<!DOCTYPE html>
@@ -148,27 +150,53 @@ function updateArticlesIndex(articlesDir) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Все статьи</title>
+    <title>Блог — Все статьи</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 0 auto;
+            padding: 40px 20px;
             line-height: 1.6;
-            color: #333;
+            color: #2c3e50;
+            background-color: #f8f9fa;
         }
-        h1 { color: #1a252f; border-bottom: 2px solid #eee; padding-bottom: 12px; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 14px; padding: 12px 16px; background: #f8f9fa; border-radius: 6px; }
-        li:hover { background: #e9ecef; }
-        a { color: #0066cc; text-decoration: none; font-size: 1.1em; font-weight: 500; display: block; }
-        a:hover { text-decoration: underline; }
+        .header { margin-bottom: 30px; }
+        .back-home { display: inline-block; margin-bottom: 15px; color: #0066cc; text-decoration: none; font-weight: 500; }
+        .back-home:hover { text-decoration: underline; }
+        h1 { font-size: 2em; color: #1a252f; margin: 0 0 10px 0; }
+        p.subtitle { color: #6c757d; margin: 0; }
+        ul.article-list { list-style: none; padding: 0; margin: 30px 0 0 0; }
+        ul.article-list li { margin-bottom: 12px; }
+        ul.article-list a {
+            display: block;
+            padding: 18px 22px;
+            background: #ffffff;
+            color: #1a252f;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+        }
+        ul.article-list a:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,102,204,0.1);
+        }
     </style>
 </head>
 <body>
-    <h1>Список всех статей</h1>
-    <ul>
+    <div class="header">
+        <a href="/" class="back-home">← На главную</a>
+        <h1>Список всех статей</h1>
+        <p class="subtitle">Полезные материалы по SEO, контекстной рекламе и веб-разработке</p>
+    </div>
+    <ul class="article-list">
 ${linksList}
     </ul>
 </body>
