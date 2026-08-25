@@ -2,21 +2,21 @@ name: Авто-генерация статей
 
 on:
   schedule:
-    # Запуск каждый день в 09:00 UTC (12:00 по Киеву / 12:00 по МСК)
+    # Запуск каждый день в 09:00 UTC (12:00 по Киеву/МСК)
     - cron: '0 9 * * *'
-  workflow_dispatch: # Кнопка для ручного запуска во вкладке Actions
+  workflow_dispatch: # Возможность ручного запуска из вкладки Actions
+
+permissions:
+  contents: write
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Выдача боту прав на сохранение файлов в репозитории
 
     steps:
       - name: 1. Скачиваем репозиторий
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: 2. Устанавливаем Node.js
@@ -30,21 +30,9 @@ jobs:
         run: node generate.js
 
       - name: 4. Публикуем созданную статью и обновленный index.html в GitHub
-      
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SEO_ADSPRO }}'
-          channelId: live
-          projectId: seo-adspro
-          
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add articles/
           git status
-          git commit -m "Auto-generated new article [skip ci]" || exit 0
-          git push origin main
-          
- 
+          git diff-index --quiet HEAD || (git commit -m "Auto-generated new article [skip ci]" && git pull origin main --rebase && git push origin main)
