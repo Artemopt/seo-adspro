@@ -1,0 +1,32 @@
+name: Авто-генерация статей
+
+on:
+  schedule:
+    # Каждый день в 09:00 UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Позволяет запустить вручную кнопкой в GitHub
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Скачиваем репозиторий
+        uses: actions/checkout@v4
+
+      - name: Устанавливаем Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Запускаем генератор статьи
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node generate.js
+
+      - name: Сохраняем новую статью обратно в GitHub
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          git add articles/
+          git commit -m "Auto-generated new article" || exit 0
+          git push
