@@ -3,7 +3,7 @@ name: Авто-генерация статей
 on:
   schedule:
     # Запуск каждый день в 09:00 UTC (12:00 по Киеву/МСК)
-    - cron: '30 6 * * *'
+    - cron: '0 9 * * *'
   workflow_dispatch: # Возможность ручного запуска из вкладки Actions
 
 permissions:
