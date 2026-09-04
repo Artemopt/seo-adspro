@@ -7,8 +7,8 @@ async function generateArticle() {
   const articlesDir = path.join(__dirname, 'articles');
 
   if (!API_KEY) {
-    console.warn("Предупреждение: GEMINI_API_KEY не найден. Генерация статьи пропущена, пересобираем списки статей...");
-    updateAllIndexes(articlesDir);
+    console.warn("Предупреждение: GEMINI_API_KEY не найден. Генерация статьи пропущена, пересобираем список статей...");
+    updateArticlesPageIndex(articlesDir, getArticlesList(articlesDir));
     return;
   }
 
@@ -147,7 +147,7 @@ async function generateArticle() {
 
     const filePath = path.join(articlesDir, fileName);
     fs.writeFileSync(filePath, fullHtml, 'utf8');
-    console.log(` Успешно создана новая статья: articles/${fileName}`);
+    console.log(`Успешно создана новая статья: articles/${fileName}`);
 
     updateAllIndexes(articlesDir);
 
@@ -186,15 +186,12 @@ function getArticlesList(articlesDir) {
 function updateAllIndexes(articlesDir) {
   const items = getArticlesList(articlesDir);
 
-  // 1. Обновляем страницу статей (articles/index.html)
+  // Обновляем ТОЛЬКО страницу всех статей (articles/index.html)
   updateArticlesPageIndex(articlesDir, items);
-
-  // 2. Обновляем главную страницу (index.html)
-  updateMainPageIndex(items);
 }
 
 function updateArticlesPageIndex(articlesDir, items) {
-  console.log(" Обновляем файл articles/index.html...");
+  console.log("Обновляем файл articles/index.html...");
 
   const cardsList = items.length > 0 ? items.map((item, idx) => {
     const num = String(idx + 1).padStart(2, '0');
@@ -298,35 +295,6 @@ ${cardsList}
 </html>`;
 
   fs.writeFileSync(path.join(articlesDir, 'index.html'), indexHtml, 'utf8');
-}
-
-function updateMainPageIndex(items) {
-  const mainIndexPath = path.join(__dirname, 'index.html');
-  if (!fs.existsSync(mainIndexPath)) return;
-
-  console.log(" Обновляем главную страницу index.html...");
-  let mainContent = fs.readFileSync(mainIndexPath, 'utf8');
-
-  // Берём последние 7 статей
-  const latest7 = items.slice(0, 7);
-
-  const listRows = latest7.length > 0 ? latest7.map(item => {
-    return `      <a href="articles/${item.file}" style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--bg-card, #1c1f26); border: 1px solid var(--border, #2a2e39); border-radius: 8px; text-decoration: none; color: var(--ink, #fff); transition: border-color 0.2s;">
-        <span style="font-size: 16px; font-weight: 500;">${item.title}</span>
-        <span style="color: var(--gold, #C9A227); font-size: 14px; font-weight: 600; white-margin-left: 16px; flex-shrink: 0;">Читати →</span>
-      </a>`;
-  }).join('\n') : '<p style="color:var(--muted); text-align:center;">Поки що немає опублікованих статей.</p>';
-
-  const listRegex = /<div id="latest-articles-list"[^>]*>[\s\S]*?<\/div>/i;
-  const newListContainer = `<div id="latest-articles-list" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">\n${listRows}\n    </div>`;
-
-  if (listRegex.test(mainContent)) {
-    mainContent = mainContent.replace(listRegex, newListContainer);
-    fs.writeFileSync(mainIndexPath, mainContent, 'utf8');
-    console.log(" Главная страница index.html успешно обновлена!");
-  } else {
-    console.warn(" Тег <div id=\"latest-articles-list\"> не найден в index.html. Добавьте его на главную страницу.");
-  }
 }
 
 generateArticle();
