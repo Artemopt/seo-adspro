@@ -35,7 +35,8 @@ async function generateArticle() {
   console.log(`Запрашиваем статью у Gemini API на тему: "${selectedTopic}"...`);
   
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
+	const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
+
     
     const response = await fetch(url, {
       method: 'POST',
