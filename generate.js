@@ -305,21 +305,21 @@ function updateSitemap() {
 
   const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.html') && file !== 'index.html');
 
-  let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  sitemapContent += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  let sitemapContent = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  sitemapContent += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   
-  // Главная
+  // Главная страница
   sitemapContent += `  <url>\n    <loc>${domain}/</loc>\n    <priority>1.0</priority>\n  </url>\n`;
 
-  // Каталог статей
+  // Страница списка статей
   sitemapContent += `  <url>\n    <loc>${domain}/articles/index.html</loc>\n    <priority>0.9</priority>\n  </url>\n`;
 
-  // Все статьи
+  // Все отдельные статьи
   files.forEach(file => {
     sitemapContent += `  <url>\n    <loc>${domain}/articles/${file}</loc>\n    <priority>0.8</priority>\n  </url>\n`;
   });
 
-  sitemapContent += `</urlset>`;
+  sitemapContent += '</urlset>';
 
   fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapContent, 'utf8');
   console.log('sitemap.xml успешно обновлен!');
