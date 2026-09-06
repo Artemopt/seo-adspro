@@ -29,10 +29,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node generate.js
 
-      - name: 4. Публикуем созданную статью и обновленный index.html в GitHub
+      - name: 4. Публикуем изменения (статья, sitemap, robots, index) в GitHub
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "auto: publish new article and update main page [skip ci]" || exit 0
+          git add -A
+          git commit -m "auto: publish new article, update index and sitemap [skip ci]" || exit 0
           git push origin main
