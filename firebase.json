@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "seo-adspro",
     "public": ".",
     "ignore": [
       "firebase.json",
