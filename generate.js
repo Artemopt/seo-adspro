@@ -298,29 +298,46 @@ ${cardsList}
 }
 
 function updateSitemap() {
-  const domain = "https://seo-adspro.web.app";
+  const domain = 'https://seo-adspro.web.app';
   const articlesDir = path.join(__dirname, 'articles');
-  
+
   if (!fs.existsSync(articlesDir)) return;
 
-  const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.html') && file !== 'index.html');
+  const files = fs
+    .readdirSync(articlesDir)
+    .filter(file => file.endsWith('.html') && file !== 'index.html');
 
-  let sitemapContent = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  sitemapContent += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+
   // Главная страница
-  sitemapContent += `  <url>\n    <loc>${domain}/</loc>\n    <priority>1.0</priority>\n  </url>\n`;
+  xml += `  <url>
+    <loc>${domain}/</loc>
+    <priority>1.0</priority>
+  </url>\n`;
 
-  // Страница списка статей
-  sitemapContent += `  <url>\n    <loc>${domain}/articles/index.html</loc>\n    <priority>0.9</priority>\n  </url>\n`;
+  // Страница всех статей
+  xml += `  <url>
+    <loc>${domain}/articles/index.html</loc>
+    <priority>0.9</priority>
+  </url>\n`;
 
-  // Все отдельные статьи
+  // Отдельные статьи
   files.forEach(file => {
-    sitemapContent += `  <url>\n    <loc>${domain}/articles/${file}</loc>\n    <priority>0.8</priority>\n  </url>\n`;
+    xml += `  <url>
+    <loc>${domain}/articles/${file}</loc>
+    <priority>0.8</priority>
+  </url>\n`;
   });
 
-  sitemapContent += '</urlset>';
+  xml += '</urlset>';
 
-  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapContent, 'utf8');
-  console.log('sitemap.xml успешно обновлен!');
+  fs.writeFileSync(
+    path.join(__dirname, 'sitemap.xml'),
+    xml,
+    'utf8'
+  );
+
+  console.log('sitemap.xml успешно пересобран!');
 }
