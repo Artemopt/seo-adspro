@@ -300,3 +300,37 @@ ${cardsList}
 }
 
 generateArticle();
+
+
+
+
+const fs = require('fs');
+const path = require('path');
+
+function updateSitemap() {
+  const domain = "https://seo-adspro.web.app";
+  const articlesDir = path.join(__dirname, 'articles');
+  
+  // Получаем список всех HTML файлов из папки articles
+  const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.html'));
+
+  let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  sitemapContent += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  
+  // Главная страница
+  sitemapContent += `  <url>\n    <loc>${domain}/</loc>\n    <priority>1.0</priority>\n  </url>\n`;
+
+  // Все статьи
+  files.forEach(file => {
+    sitemapContent += `  <url>\n    <loc>${domain}/articles/${file}</loc>\n    <priority>0.8</priority>\n  </url>\n`;
+  });
+
+  sitemapContent += `</urlset>`;
+
+  // Записываем sitemap.xml в корень
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapContent);
+  console.log('sitemap.xml успешно обновлен!');
+}
+
+// Вызовите эту функцию в конце генерации статьи
+updateSitemap();

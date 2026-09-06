@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seo-adspro.web.app/sitemap.xml
