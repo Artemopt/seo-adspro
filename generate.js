@@ -331,7 +331,7 @@ function updateSitemap() {
   </url>\n`;
   });
 
-  xml += '</urlset>';
+xml += '</urlset>';
 
   fs.writeFileSync(
     path.join(__dirname, 'sitemap.xml'),
@@ -341,3 +341,5 @@ function updateSitemap() {
 
   console.log('sitemap.xml успешно пересобран!');
 }
+
+generateArticle();
