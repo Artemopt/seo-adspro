@@ -9,6 +9,7 @@ async function generateArticle() {
   if (!API_KEY) {
     console.warn("Предупреждение: GEMINI_API_KEY не найден. Генерация статьи пропущена, пересобираем список статей...");
     updateArticlesPageIndex(articlesDir, getArticlesList(articlesDir));
+    updateSitemap();
     return;
   }
 
@@ -37,8 +38,6 @@ async function generateArticle() {
   try {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
 
-
-    
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -152,6 +151,7 @@ async function generateArticle() {
     console.log(`Успешно создана новая статья: articles/${fileName}`);
 
     updateAllIndexes(articlesDir);
+    updateSitemap();
 
   } catch (err) {
     console.error("Произошла ошибка во время выполнения скрипта:", err);
@@ -187,8 +187,6 @@ function getArticlesList(articlesDir) {
 
 function updateAllIndexes(articlesDir) {
   const items = getArticlesList(articlesDir);
-
-  // Обновляем ТОЛЬКО страницу всех статей (articles/index.html)
   updateArticlesPageIndex(articlesDir, items);
 }
 
@@ -299,38 +297,32 @@ ${cardsList}
   fs.writeFileSync(path.join(articlesDir, 'index.html'), indexHtml, 'utf8');
 }
 
-generateArticle();
-
-
-
-
-const fs = require('fs');
-const path = require('path');
-
 function updateSitemap() {
-  const domain = "https://seo-adspro.web.app";
+  const domain = "[https://seo-adspro.web.app](https://seo-adspro.web.app)";
   const articlesDir = path.join(__dirname, 'articles');
   
-  // Получаем список всех HTML файлов из папки articles
-  const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.html'));
+  if (!fs.existsSync(articlesDir)) return;
+
+  const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.html') && file !== 'index.html');
 
   let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  sitemapContent += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  sitemapContent += `<urlset xmlns="[http://www.sitemaps.org/schemas/sitemap/0.9](http://www.sitemaps.org/schemas/sitemap/0.9)">\n`;
   
   // Главная страница
   sitemapContent += `  <url>\n    <loc>${domain}/</loc>\n    <priority>1.0</priority>\n  </url>\n`;
 
-  // Все статьи
+  // Страница списка статей
+  sitemapContent += `  <url>\n    <loc>${domain}/articles/index.html</loc>\n    <priority>0.9</priority>\n  </url>\n`;
+
+  // Каждая отдельная статья
   files.forEach(file => {
     sitemapContent += `  <url>\n    <loc>${domain}/articles/${file}</loc>\n    <priority>0.8</priority>\n  </url>\n`;
   });
 
   sitemapContent += `</urlset>`;
 
-  // Записываем sitemap.xml в корень
-  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapContent);
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapContent, 'utf8');
   console.log('sitemap.xml успешно обновлен!');
 }
 
-// Вызовите эту функцию в конце генерации статьи
-updateSitemap();
+generateArticle();
