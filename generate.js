@@ -3,6 +3,51 @@ const path = require('path');
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
+// Функция отправки запроса с повторными попытками при ошибках 503 / 429
+async function fetchWithRetry(promptText, retries = 3, delayMs = 4000) {
+  // Список рабочих моделей Gemini по приоритету
+  const models = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-2.0-flash'];
+
+  for (const modelName of models) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(API_KEY)}`;
+
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        console.log(`Пробуем модель ${modelName} (попытка ${attempt}/${retries})...`);
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+          })
+        });
+
+        const data = await response.json();
+
+        // Если сервер перегружен (503) или слишком много запросов (429) — ждем и пробуем снова
+        if ((response.status === 503 || response.status === 429) && attempt < retries) {
+          console.warn(`[${modelName}] API перегружен (код ${response.status}). Ждем ${delayMs / 1000} сек...`);
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+          delayMs *= 1.5; // Увеличиваем паузу
+          continue;
+        }
+
+        if (response.ok && data.candidates && data.candidates[0]) {
+          return data; // Успешный ответ
+        }
+
+        console.warn(`Модель ${modelName} вернула ошибку:`, data.error?.message || JSON.stringify(data));
+        break; // Переходим к следующей модели в списке
+      } catch (err) {
+        console.warn(`Ошибка сети при вызове ${modelName}:`, err.message);
+        break;
+      }
+    }
+  }
+
+  throw new Error("Все доступные модели Gemini недоступны на данный момент.");
+}
+
 async function generateArticle() {
   const articlesDir = path.join(__dirname, 'articles');
 
@@ -36,22 +81,7 @@ async function generateArticle() {
   console.log(`Запрашиваем статью у Gemini API на тему: "${selectedTopic}"...`);
   
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${encodeURIComponent(API_KEY)}`;
-
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.candidates || !data.candidates[0]) {
-      console.error("Ошибка от Gemini API:", JSON.stringify(data, null, 2));
-      process.exit(1);
-    }
+    const data = await fetchWithRetry(prompt);
 
     let articleBody = data.candidates[0].content.parts[0].text.trim();
     articleBody = articleBody.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
@@ -154,7 +184,7 @@ async function generateArticle() {
     updateSitemap();
 
   } catch (err) {
-    console.error("Произошла ошибка во время выполнения скрипта:", err);
+    console.error("Произошла ошибка во время выполнения скрипта:", err.message);
     process.exit(1);
   }
 }
@@ -298,7 +328,7 @@ ${cardsList}
 }
 
 function updateSitemap() {
-  const domain = 'https://seo-adspro.web.app';
+  const domain = '[https://seo-adspro.web.app](https://seo-adspro.web.app)';
   const articlesDir = path.join(__dirname, 'articles');
 
   if (!fs.existsSync(articlesDir)) return;
@@ -309,21 +339,18 @@ function updateSitemap() {
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
 
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  xml += '<urlset xmlns="[http://www.sitemaps.org/schemas/sitemap/0.9](http://www.sitemaps.org/schemas/sitemap/0.9)">\n';
 
-  // Главная страница
   xml += `  <url>
     <loc>${domain}/</loc>
     <priority>1.0</priority>
   </url>\n`;
 
-  // Страница всех статей
   xml += `  <url>
     <loc>${domain}/articles/index.html</loc>
     <priority>0.9</priority>
   </url>\n`;
 
-  // Отдельные статьи
   files.forEach(file => {
     xml += `  <url>
     <loc>${domain}/articles/${file}</loc>
@@ -331,7 +358,7 @@ function updateSitemap() {
   </url>\n`;
   });
 
-xml += '</urlset>';
+  xml += '</urlset>';
 
   fs.writeFileSync(
     path.join(__dirname, 'sitemap.xml'),
