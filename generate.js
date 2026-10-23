@@ -6,7 +6,8 @@ const API_KEY = process.env.GEMINI_API_KEY;
 // Функция отправки запроса с повторными попытками при ошибках 503 / 429
 async function fetchWithRetry(promptText, retries = 3, delayMs = 4000) {
   // Список рабочих моделей Gemini по приоритету
-  const models = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-2.0-flash'];
+  const models = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+ // const models = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-2.0-flash'];
 
   for (const modelName of models) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(API_KEY)}`;
